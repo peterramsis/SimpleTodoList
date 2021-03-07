@@ -1,32 +1,41 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <AppHeader title="Todolist" @toggle="ToggleForm" :textShow="toggle" />
+    <router-view :toggle="toggle"></router-view>
+    <AppFooter :textShow="toggle" />
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  box-sizing: border-box;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#app {
+  width: 500px;
+  margin: auto;
 }
 </style>
+
+<script>
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+
+export default {
+  name: "App",
+  data() {
+    return {
+      toggle: true
+    };
+  },
+  methods: {
+    ToggleForm() {
+      this.toggle = !this.toggle;
+    }
+  },
+  components: {
+    AppHeader,
+    AppFooter
+  },
+  async created() {}
+};
+</script>
